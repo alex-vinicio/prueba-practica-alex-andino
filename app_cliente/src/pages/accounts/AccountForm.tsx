@@ -54,8 +54,8 @@ function AccountForm() {
       onSuccess: () => {
         navigate('/accounts');
       },
-      onError: (err: any) => {
-        setError(err.message || 'Error al guardar la cuenta');
+      onError: (err: Error) => {
+        setError(err.message);
       },
     }
   );

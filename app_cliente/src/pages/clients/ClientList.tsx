@@ -81,13 +81,13 @@ function ClientList() {
                 <TableCell>
                   <IconButton
                     color="primary"
-                    onClick={() => navigate(`/clients/edit/${client.identifier}`)}
+                    onClick={() => navigate(`/clients/edit/${encodeURIComponent(client.name)}`)}
                   >
                     <EditIcon />
                   </IconButton>
                   <IconButton
                     color="error"
-                    onClick={() => deleteMutation.mutate(client.identifier)}
+                    onClick={() => deleteMutation.mutate(client.name)}
                   >
                     <DeleteIcon />
                   </IconButton>

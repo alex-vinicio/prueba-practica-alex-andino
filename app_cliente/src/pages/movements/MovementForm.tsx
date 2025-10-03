@@ -31,8 +31,8 @@ function MovementForm() {
     onSuccess: () => {
       navigate('/movements');
     },
-    onError: (err: any) => {
-      setError(err.message || 'Error al crear el movimiento');
+    onError: (err: Error) => {
+      setError(err.message);
     },
   });
 

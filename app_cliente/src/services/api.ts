@@ -22,10 +22,10 @@ const accountApi = axios.create({
 
 // Error handling interceptor for both instances
 const errorInterceptor = (error: any) => {
-  if (error.response?.status === 400) {
-    return Promise.reject(error.response.data);
+  if (error.response?.data) {
+    return Promise.reject(new Error(error.response.data.message || 'Error en la operación'));
   }
-  return Promise.reject(error);
+  return Promise.reject(new Error('Error en la conexión con el servidor'));
 };
 
 clientApi.interceptors.response.use((response) => response, errorInterceptor);
@@ -35,17 +35,17 @@ accountApi.interceptors.response.use((response) => response, errorInterceptor);
 export const getClients = () => 
   clientApi.get<Client[]>('/clients').then(response => response.data);
 
-export const getClientById = (id: string) =>
-  clientApi.get<Client>(`/clients/${id}`).then(response => response.data);
+export const getClientById = (name: string) =>
+  clientApi.get<Client>(`/clients/${encodeURIComponent(name)}`).then(response => response.data);
 
 export const createClient = (client: Omit<Client, 'id'>) =>
   clientApi.post<Client>('/clients', client).then(response => response.data);
 
-export const updateClient = (id: string, client: Partial<Client>) =>
-  clientApi.put<Client>(`/clients/${id}`, client).then(response => response.data);
+export const updateClient = (name: string, client: Partial<Client>) =>
+  clientApi.put<Client>(`/clients/${encodeURIComponent(name)}`, client).then(response => response.data);
 
-export const deleteClient = (id: string) =>
-  clientApi.delete(`/clients/${id}`).then(response => response.data);
+export const deleteClient = (name: string) =>
+  clientApi.delete(`/clients/${encodeURIComponent(name)}`).then(response => response.data);
 
 // Accounts
 export const getAccounts = () =>
