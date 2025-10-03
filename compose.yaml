@@ -50,6 +50,15 @@ services:
       SPRING_DATASOURCE_PASSWORD: admin123
     ports:
       - "8095:8095"
+  frontend:
+    build: ./app_cliente
+    container_name: app_client
+    ports:
+      - "3000:80"
+    depends_on:
+      - account_service
+      - client_service
+
 volumes:
   postgres_data:
   pgadmin-data:
