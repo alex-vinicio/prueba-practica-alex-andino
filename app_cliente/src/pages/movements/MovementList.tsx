@@ -21,12 +21,21 @@ function MovementList() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
-  const { data: movements, isLoading } = useQuery<Movement[]>(
-    ['movements'],
-    getMovements
-  );
+  const { data: movements, isLoading, error: queryError } = useQuery<Movement[]>({
+    queryKey: ['movements'],
+    queryFn: getMovements,
+    onError: (err) => {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Error desconocido al cargar los movimientos');
+      }
+    }
+  });
 
   if (isLoading) return <Typography>Cargando...</Typography>;
+  
+  if (queryError) return <Alert severity="error">Error al cargar los movimientos</Alert>;
 
   return (
     <div>
@@ -61,7 +70,7 @@ function MovementList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {movements?.map((movement, index) => (
+            {movements && movements.map((movement: Movement, index: number) => (
               <TableRow key={index}>
                 <TableCell>{movement.date}</TableCell>
                 <TableCell>{movement.client}</TableCell>
