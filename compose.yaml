@@ -1,0 +1,55 @@
+services:
+  db:
+    image: 'postgres:latest'
+    container_name: postgres_db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: admin123
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: clientside
+    ports:
+      - "5432"
+      #- '15432:5432' #para setear un puerto especifico
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+  client_service:
+    build: ./clientes
+    container_name: client_service
+    restart: no
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/clientside
+      SPRING_DATASOURCE_USERNAME: admin123
+      SPRING_DATASOURCE_PASSWORD: admin123
+    ports:
+      - "8090:8090"
+  account_service:
+    build: ./cuentas
+    container_name: account_service
+    restart: no
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/clientside
+      SPRING_DATASOURCE_USERNAME: admin123
+      SPRING_DATASOURCE_PASSWORD: admin123
+    ports:
+      - "8095:8095"
+volumes:
+  postgres_data:
+  pgadmin-data:
