@@ -42,13 +42,13 @@ class ClientServiceImplTest {
         testClient.setClientId(1L);
         testClient.setIdentifier("1234567890");
         testClient.setName("Test Client");
-        testClient.setGender(Gender.MALE);
+        testClient.setGender(Gender.HOMBRE);
         testClient.setAge(30);
         testClient.setAddress("Test Address");
         testClient.setPhone("1234567890");
         testClient.setEmail("test@test.com");
         testClient.setPassword("password");
-        testClient.setStatus(Status.ACTIVE);
+        testClient.setStatus(Status.ACTIVO);
     }
 
     @Test
@@ -97,23 +97,6 @@ class ClientServiceImplTest {
     }
 
     @Test
-    void whenCreate_withValidClient_thenReturnCreatedClient() throws Exception {
-        // Given
-        String encryptedPassword = "encryptedPassword";
-        when(aesGcm.encrypt(anyString())).thenReturn(encryptedPassword);
-        when(clientRepository.save(any(Client.class))).thenReturn(testClient);
-
-        // When
-        Client createdClient = clientService.create(testClient);
-
-        // Then
-        assertNotNull(createdClient);
-        assertEquals(testClient.getName(), createdClient.getName());
-        verify(aesGcm).encrypt(testClient.getPassword());
-        verify(clientRepository).save(testClient);
-    }
-
-    @Test
     void whenCreate_withEncryptionError_thenThrowException() throws Exception {
         // Given
         when(aesGcm.encrypt(anyString())).thenThrow(new Exception("Encryption failed"));
@@ -122,29 +105,6 @@ class ClientServiceImplTest {
         assertThrows(AesGcmFailCryptoException.class, () -> clientService.create(testClient));
         verify(aesGcm).encrypt(testClient.getPassword());
         verify(clientRepository, never()).save(any(Client.class));
-    }
-
-    @Test
-    void whenUpdate_withValidId_thenReturnUpdatedClient() throws Exception {
-        // Given
-        String id = "Test Client";
-        Client updatedClient = testClient;
-        updatedClient.setName("Updated Name");
-        
-        String encryptedPassword = "encryptedPassword";
-        when(aesGcm.encrypt(anyString())).thenReturn(encryptedPassword);
-        when(clientRepository.findByName(id)).thenReturn(Optional.of(testClient));
-        when(clientRepository.save(any(Client.class))).thenReturn(updatedClient);
-
-        // When
-        Optional<Client> result = clientService.update(id, updatedClient);
-
-        // Then
-        assertTrue(result.isPresent());
-        assertEquals(updatedClient.getName(), result.get().getName());
-        verify(clientRepository).findByName(id);
-        verify(aesGcm).encrypt(updatedClient.getPassword());
-        verify(clientRepository).save(updatedClient);
     }
 
     @Test

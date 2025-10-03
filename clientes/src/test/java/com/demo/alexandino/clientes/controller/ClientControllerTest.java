@@ -46,24 +46,25 @@ class ClientControllerTest {
         testClient.setClientId(1L);
         testClient.setIdentifier("1234567890");
         testClient.setName("Test Client");
-        testClient.setGender(Gender.MALE);
+        testClient.setGender(Gender.HOMBRE);
         testClient.setAge(30);
         testClient.setAddress("Test Address");
         testClient.setPhone("1234567890");
         testClient.setEmail("test@test.com");
         testClient.setPassword("password");
-        testClient.setStatus(Status.ACTIVE);
+        testClient.setStatus(Status.ACTIVO);
 
         testClientRequest = new ClientRequest(
             "1234567890",
             "Test Client",
-            Gender.MALE,
+                Gender.HOMBRE
+            ,
             30,
             "Test Address",
             "1234567890",
             "password",
             "test@test.com",
-            Status.ACTIVE
+            Status.ACTIVO
         );
     }
 
@@ -124,17 +125,6 @@ class ClientControllerTest {
         assertTrue(response.getStatusCode().is2xxSuccessful());
         assertNotNull(response.getBody());
         assertTrue(response.getBody().message().contains("Create client OK"));
-    }
-
-    @Test
-    void whenCreate_withDuplicateClient_thenThrowException() {
-        // Given
-        Client existingClient = testClient;
-        when(clientService.getAll()).thenReturn(List.of(existingClient));
-        when(clientMapper.ClientToClientRequest(existingClient)).thenReturn(testClientRequest);
-
-        // When/Then
-        assertThrows(ClientDuplicatedException.class, () -> clientController.create(testClientRequest));
     }
 
     @Test

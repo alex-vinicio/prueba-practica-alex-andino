@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "b6d36c0f-676a-4e26-9756-e1c92b00b58c",
+		"name": "prueba-tecnica-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11861586",
+		"_collection_link": "https://galactic-rocket-846660.postman.co/workspace/dev-alex~da441456-f190-4dfd-a681-5cb4147a5bfd/collection/11861586-b6d36c0f-676a-4e26-9756-e1c92b00b58c?action=share&source=collection_link&creator=11861586"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_cliente}}/clients",
+							"host": [
+								"{{url_cliente}}"
+							],
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_cliente}}/clients/Julian Pérez test",
+							"host": [
+								"{{url_cliente}}"
+							],
+							"path": [
+								"clients",
+								"Julian Pérez test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_cliente}}/clients/1234567893",
+							"host": [
+								"{{url_cliente}}"
+							],
+							"path": [
+								"clients",
+								"1234567893"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identifier\": \"1234567894\",\r\n    \"name\": \"Julian Pérez test\",\r\n    \"age\": 33,\r\n    \"gender\": \"HOMBRE\",\r\n    \"address\": \"Av. Siempre Viva 123\",\r\n    \"phone\": \"+593987654321\",\r\n    \"email\": \"juan.perez@mail.com\",\r\n    \"password\": \"Secr3t0!\",\r\n    \"status\": \"ACTIVO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_cliente}}/clients/Juan Pérez 1",
+							"host": [
+								"{{url_cliente}}"
+							],
+							"path": [
+								"clients",
+								"Juan Pérez 1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identifier\": \"1234567894\",\r\n    \"name\": \"test2\",\r\n    \"age\": 30,\r\n    \"gender\": \"HOMBRE\",\r\n    \"address\": \"Av. Siempre Viva 123\",\r\n    \"phone\": \"+593987654321\",\r\n    \"email\": \"juan.perez@mail.com\",\r\n    \"password\": \"Secr3t0!\",\r\n    \"status\": \"ACTIVO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_cliente}}/clients",
+							"host": [
+								"{{url_cliente}}"
+							],
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cuentas",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/accounts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/accounts/1234567894",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"1234567894"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/accounts/1234567892",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"1234567892"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": \"12345678952\",\r\n    \"accountType\": \"AHORRO\",\r\n    \"initialBalance\": \"100\",\r\n    \"status\": \"ACTIVO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/accounts/12345678952",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"12345678952"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": \"1234567892\",\r\n    \"accountType\": \"AHORRO\",\r\n    \"initialBalance\": \"100\",\r\n    \"status\": \"ACTIVO\",\r\n    \"clientName\": \"test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/accounts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movimiento\\",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/movements",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"movements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/movements/account/1234567896",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"movements",
+								"account",
+								"1234567896"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/movements/1234567892",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"movements",
+								"1234567892"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movementType\": \"CREDIT\",\r\n    \"value\": \"50\",\r\n    \"accountNumber\": \"1234567896\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/movements",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"movements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "url_cliente",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
