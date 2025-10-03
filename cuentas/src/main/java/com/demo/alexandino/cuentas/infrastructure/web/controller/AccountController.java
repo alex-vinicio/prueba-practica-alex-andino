@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/accounts")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class AccountController {
     private static final String DELETE_ACCOUNT_OK = "Delete account OK";
     private static final String CREATED_ACCOUNT_OK = "Create account OK";
